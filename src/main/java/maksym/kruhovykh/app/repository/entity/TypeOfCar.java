@@ -4,26 +4,29 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "address")
+@Table(name = "type_of_car")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Address {
-
+public class TypeOfCar {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column
-    private String name;
+    private String type;
 
     @Column
-    private Double latitude;
+    private Double transportationPricePerKm;
 
-    @Column
-    private Double longitude;
+    public TypeOfCar(String type) {
+        this.type = type;
+    }
 
+    public String getRole() {
+        return type.toUpperCase();
+    }
 }

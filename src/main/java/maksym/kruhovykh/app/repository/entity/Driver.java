@@ -4,26 +4,23 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "address")
+@Table(name = "driver")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Address {
+public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
-    @Column
-    private Double latitude;
-
-    @Column
-    private Double longitude;
-
+    @OneToOne
+    private User user;
 }

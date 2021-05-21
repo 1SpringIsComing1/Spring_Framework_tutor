@@ -16,13 +16,22 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Integer id;
 
-    @Enumerated(EnumType.ORDINAL)
-    private Status status;
+    @Column
+    private String title;
 
     @Column
     private String description;
+
+    @Column
+    private Integer distance;
+
+    @OneToOne
+    private Address departures;
+
+    @OneToOne
+    private Address arrivals;
 
     @Column
     private Double price;
@@ -30,12 +39,10 @@ public class Order {
     @Column
     private LocalDateTime dateCreation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private User client;
+    @OneToOne
+    private Driver driver;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "worker_id")
-    private User worker;
+    @OneToOne
+    private Client client;
 
 }

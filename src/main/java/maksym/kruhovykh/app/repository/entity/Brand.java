@@ -4,26 +4,27 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "address")
+@Table(name = "brand")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Address {
-
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column
-    private String name;
+    private String brand;
 
-    @Column
-    private Double latitude;
+    public Brand(String brand) {
+        this.brand = brand;
+    }
 
-    @Column
-    private Double longitude;
+    public String getRole() {
+        return brand;
 
+    }
 }
