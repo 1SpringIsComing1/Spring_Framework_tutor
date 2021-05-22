@@ -52,7 +52,9 @@ public class UserService {
         if (!userRepository.findById(userDto.getId()).isPresent()) {
             log.warn("User with Id [" + userDto.getId() + "] doesn't exist");
             throw new EntityNotFoundException("User with Id [" + userDto.getId() + "] doesn't exist");
-        } else userRepository.delete(userMapper.userDtoToUser(userDto));
+        }
+
+        userRepository.delete(userMapper.userDtoToUser(userDto));
 
     }
 

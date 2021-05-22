@@ -12,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SpringFrameworkTutorApplication {
 
     public static void main(String[] args) {

@@ -21,6 +21,6 @@ public class Car {
     private Brand brand;
 
     @OneToOne
-    private TypeOfCar type;
+    private TypeOfCar typeOfCar;
 
 }

@@ -17,16 +17,16 @@ public class TypeOfCar {
     private Integer id;
 
     @Column
-    private String type;
+    private String name;
 
     @Column
     private Double transportationPricePerKm;
 
-    public TypeOfCar(String type) {
-        this.type = type;
+    public TypeOfCar(String name) {
+        this.name = name;
     }
 
     public String getRole() {
-        return type.toUpperCase();
+        return name.toUpperCase();
     }
 }

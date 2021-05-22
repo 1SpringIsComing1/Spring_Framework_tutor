@@ -17,14 +17,5 @@ public class Brand {
     private Integer id;
 
     @Column
-    private String brand;
-
-    public Brand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getRole() {
-        return brand;
-
-    }
+    private String name;
 }
