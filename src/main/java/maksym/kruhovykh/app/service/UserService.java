@@ -31,10 +31,9 @@ public class UserService {
 
     public UserDto update(UserDto userDto) {
         Utils.isNull(userDto, USER_IS_EMPTY);
-
         return userRepository
                 .findById(userDto.getId())
-                .map(deleteUser(userDto))
+                .map(updateUser(userDto))
                 .orElseThrow(() -> new EntityNotFoundException("User with Id [" + userDto.getId() + "] doesn't exist"));
     }
 
@@ -66,7 +65,7 @@ public class UserService {
         }
     }
 
-    private Function<User, UserDto> deleteUser(UserDto userDto) {
+    private Function<User, UserDto> updateUser(UserDto userDto) {
         return user -> {
             user.setEmail(userDto.getEmail());
             user.setPassword(userDto.getPassword());
