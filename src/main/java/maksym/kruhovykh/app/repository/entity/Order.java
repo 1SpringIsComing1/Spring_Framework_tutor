@@ -1,6 +1,7 @@
 package maksym.kruhovykh.app.repository.entity;
 
 import lombok.*;
+import maksym.kruhovykh.app.utils.Status;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -44,5 +45,8 @@ public class Order {
 
     @OneToOne
     private Client client;
+
+   @Enumerated(EnumType.ORDINAL)
+   private Status status;
 
 }

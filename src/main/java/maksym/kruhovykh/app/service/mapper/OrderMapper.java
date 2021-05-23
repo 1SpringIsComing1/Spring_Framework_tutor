@@ -24,12 +24,8 @@ public interface OrderMapper {
             @Mapping(target = "dateCreation", source = "dateCreation"),
             @Mapping(target = "clientDto.id",source = "client.id"),
             @Mapping(target = "clientDto.userDto",source = "client.user"),
-//            @Mapping(target = "clientDto.user.id",source = "client.user.id"),
-//            @Mapping(target = "clientDto.userDto.firstName",source = "client.user.firstName"),
-//            @Mapping(target = "clientDto.userDto.lastName",source = "client.user.lastName"),
-//            @Mapping(target = "clientDto.userDto.email",source = "client.user.email"),
-//            @Mapping(target = "clientDto.userDto.password",source = "client.user.password"),
-            @Mapping(target = "driverDto",source = "driver")
+            @Mapping(target = "driverDto",source = "driver"),
+            @Mapping(target = "status",source = "status")
 
     })
     OrderDto orderToOrderDto(Order order);

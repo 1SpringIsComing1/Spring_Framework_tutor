@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import maksym.kruhovykh.app.repository.entity.Address;
-import maksym.kruhovykh.app.repository.entity.Client;
-import maksym.kruhovykh.app.repository.entity.Driver;
+import maksym.kruhovykh.app.utils.Status;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -36,4 +33,6 @@ public class OrderDto {
     private DriverDto driverDto;
 
     private ClientDto clientDto;
+
+    private Status status;
 }
