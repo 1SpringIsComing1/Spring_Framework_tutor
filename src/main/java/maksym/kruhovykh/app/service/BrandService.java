@@ -8,7 +8,6 @@ import maksym.kruhovykh.app.repository.BrandRepository;
 import maksym.kruhovykh.app.repository.entity.Brand;
 import maksym.kruhovykh.app.service.mapper.BrandMapper;
 import org.springframework.stereotype.Service;
-import sun.nio.ch.Util;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
