@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
+@ToString
 @Table(name = "user")
 public class User {
 

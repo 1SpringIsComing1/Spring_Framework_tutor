@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
+@ToString
 public class TypeOfCar {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
