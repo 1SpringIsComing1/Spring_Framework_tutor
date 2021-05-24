@@ -4,11 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import maksym.kruhovykh.app.Utils;
 import maksym.kruhovykh.app.dto.CarDto;
-import maksym.kruhovykh.app.dto.OrderDto;
-import maksym.kruhovykh.app.dto.UserDto;
 import maksym.kruhovykh.app.repository.CarRepository;
 import maksym.kruhovykh.app.repository.entity.Car;
-import maksym.kruhovykh.app.repository.entity.Order;
 import maksym.kruhovykh.app.service.mapper.CarMapper;
 import org.springframework.stereotype.Service;
 
@@ -46,14 +43,13 @@ public class CarService {
         carRepository
                 .findById(carDto.getId())
                 .map(deleteCar(carDto))
-                .map(carMapper::carDtoToCar)
                 .orElseThrow(() -> new EntityNotFoundException("Car with Id [" + carDto.getId() + "] doesn't exist"));
 
     }
 
     public CarDto update(CarDto carDto) {
         Utils.isNull(carDto, CAR_IS_EMPTY);
-        isNotExist(carDto);
+        isNotExistThrowException(carDto);
 
         Car car = carMapper.carDtoToCar(carDto);
 
@@ -61,7 +57,7 @@ public class CarService {
     }
 
 
-    private void isNotExist(CarDto carDto) {
+    private void isNotExistThrowException(CarDto carDto) {
         if (!carRepository.findById(carDto.getId()).isPresent()) {
             log.error("Car with Id [" + carDto.getId() + "] doesn't exist");
             throw new EntityNotFoundException("Car with Id [" + carDto.getId() + "] doesn't exist");

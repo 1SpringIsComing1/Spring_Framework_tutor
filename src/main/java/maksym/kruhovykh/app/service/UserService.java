@@ -9,6 +9,7 @@ import maksym.kruhovykh.app.repository.entity.User;
 import maksym.kruhovykh.app.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.function.Function;
 
@@ -39,29 +40,29 @@ public class UserService {
 
     public void register(UserDto userDto) {
         Utils.isNull(userDto, USER_IS_EMPTY);
-        isExist(userDto);
+        isExistThrowException(userDto);
 
         userRepository.save(userMapper.userDtoToUser(userDto));
     }
 
     public void delete(UserDto userDto) {
         Utils.isNull(userDto, USER_IS_EMPTY);
-        isNotExist(userDto);
+        isNotExistThrowException(userDto);
 
         userRepository.delete(userMapper.userDtoToUser(userDto));
     }
 
-    private void isNotExist(UserDto userDto) {
+    private void isNotExistThrowException(UserDto userDto) {
         if (!userRepository.findById(userDto.getId()).isPresent()) {
             log.error("User with Id [" + userDto.getId() + "] doesn't exist");
             throw new EntityNotFoundException("User with Id [" + userDto.getId() + "] doesn't exist");
         }
     }
 
-    private void isExist(UserDto userDto) {
+    private void isExistThrowException(UserDto userDto) {
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             log.error("User with email [" + userDto.getEmail() + "] already exist");
-            throw new RuntimeException("User with email [" + userDto.getEmail() + "] already exist");
+            throw new EntityExistsException("User with email [" + userDto.getEmail() + "] already exist");
         }
     }
 
@@ -71,9 +72,10 @@ public class UserService {
             user.setPassword(userDto.getPassword());
             user.setFirstName(userDto.getFirstName());
             user.setLastName(userDto.getLastName());
-            User save = userRepository.save(user);
+            userRepository.save(user);
+            log.info("User with id [" + userDto.getId() + "] updated ");
+            return userDto;
 
-            return userMapper.userToUserDto(save);
         };
     }
 }
