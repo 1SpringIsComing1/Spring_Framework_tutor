@@ -19,7 +19,10 @@ public class Address {
     private Integer id;
 
     @Column
-    private String name;
+    private String streetName;
+
+    @Column
+    private Integer numberOfBuilding;
 
     @Column
     private Double latitude;

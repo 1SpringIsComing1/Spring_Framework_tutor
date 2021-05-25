@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -16,7 +17,10 @@ public class AddressDto {
     private Integer id;
 
     @Pattern(regexp = "[A-Za-zА-Яа-яёЁ]{1,200}", message = "Address name inCorrect")
-    private String name;
+
+    private String streetName;
+
+    private Integer numberOfBuilding;
 
     private Double latitude;
 
