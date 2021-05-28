@@ -24,7 +24,7 @@ public class DashBoardController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public String getDashBoard(Model model, Principal principal) {
+    public String getDashBoard(Model model) {
 
         DashBoardDto dashBoard = dashBoardService.download("Test1@gmail.com");
         List<LocationDto> locations = locationService.findAll();
@@ -34,7 +34,7 @@ public class DashBoardController {
     }
 
     @GetMapping("/hide/{id}")
-    public String hideTrip(Model model, Principal principal, @PathVariable("id") Integer tripId) {
+    public String hideTrip(Model model, @PathVariable("id") Integer tripId) {
         String email = "Test1@gmail.com";
 //        String email = principal.getName();
 
@@ -44,7 +44,7 @@ public class DashBoardController {
     }
 
     @GetMapping("/create")
-    public String create(Model model,Principal principal, @RequestParam(value = "departureLocation", required = false) Integer departureLocation,
+    public String create(Model model, @RequestParam(value = "departureLocation", required = false) Integer departureLocation,
                          @RequestParam(value = "arriveLocation", required = false) Integer arriveLocation) {
         List<TripDto> tripsByRequest = dashBoardService.findAlLByCitiesIds(departureLocation, arriveLocation);
         model.addAttribute("departureLocation", departureLocation);
