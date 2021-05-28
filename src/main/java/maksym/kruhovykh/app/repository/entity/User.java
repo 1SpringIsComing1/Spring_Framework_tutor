@@ -1,8 +1,10 @@
 package maksym.kruhovykh.app.repository.entity;
 
 import lombok.*;
+import maksym.kruhovykh.app.utils.Role;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Getter
@@ -31,5 +33,9 @@ public class User {
     @Column(nullable = false, length = 15, unique = true)
     private String password;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "usr_role", foreignKey = @ForeignKey(name = "usr_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
 }
