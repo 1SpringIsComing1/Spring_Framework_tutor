@@ -1,18 +1,12 @@
 package maksym.kruhovykh.app.service;
 
-import liquibase.pro.packaged.D;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import maksym.kruhovykh.app.dto.DashBoardDto;
 import maksym.kruhovykh.app.dto.TripDto;
-import maksym.kruhovykh.app.dto.UserDto;
 import maksym.kruhovykh.app.repository.ClientRepository;
 import maksym.kruhovykh.app.repository.TripRepository;
-import maksym.kruhovykh.app.repository.UserRepository;
 import maksym.kruhovykh.app.repository.entity.Client;
-import maksym.kruhovykh.app.repository.entity.Location;
-import maksym.kruhovykh.app.repository.entity.Trip;
-import maksym.kruhovykh.app.repository.entity.User;
 import maksym.kruhovykh.app.service.mapper.TripMapper;
 import maksym.kruhovykh.app.utils.Status;
 import org.springframework.stereotype.Service;
@@ -21,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -37,10 +32,10 @@ public class DashBoardService {
         Double moneySpent = ifNullSetDefaultValue(tripRepository.moneySpentByClient(Status.CLOSED, client));
         Integer distancePassed = ifNullSetDefaultValue(tripRepository.distancePassed(Status.CLOSED, client));
 
-        List<Status> pendingAndApprovedStatuses = Arrays.asList(Status.PENDING, Status.APPROVED);
+        List<Status> pendingAndFullStatuses = Arrays.asList(Status.PENDING, Status.FULL);
 
         List<TripDto> openTrips = tripMapper.mapTripsToTripsDto(tripRepository
-                .findTripsByStatusAndClient(pendingAndApprovedStatuses, client));
+                .findTripsByStatusAndClient(pendingAndFullStatuses, client));
 
         List<TripDto> completedTrips = tripMapper.mapTripsToTripsDto(tripRepository
                 .findTripsByStatusAndClientAndIsShowed(Status.CLOSED, client, true));
@@ -52,6 +47,15 @@ public class DashBoardService {
                 .completedTrips(completedTrips)
                 .openTrip(openTrips)
                 .build();
+    }
+
+    public List<TripDto> findAlLByCitiesIds(Integer departureId, Integer arrivalId) {
+        return tripRepository
+                .findAllByCitiesIds(departureId, arrivalId)
+                .stream()
+                .filter(x -> x.getStatus() == Status.PENDING)
+                .map(tripMapper::tripToTripDto)
+                .collect(Collectors.toList());
     }
 
     private Integer ifNullSetDefaultValue(Integer value) {

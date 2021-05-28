@@ -238,25 +238,65 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header card-header-danger">
-                                <h4 class="card-title">Create Trip</h4>
+                                <h4 class="card-title">Show Trips</h4>
                             </div>
-                            <form  class="card-body table-responsive">
-                                <label>
-                                    <select name="specialityDeparture" class=" custom-select"  title="Choose one of the following..." >
-                                        <option th:each="location : ${locations}" value="${location.id}" th:text="${location.locationName}" selected>Open this
+                            <form action="/create" class="card-body table-responsive">
+                                <label style="width: 30%">
+                                    <select name="departureLocation" class=" custom-select"
+                                            title="Choose one of the following...">
+                                        <option  th:each="location : ${locations}"
+                                                th:name="${location.id}" th:value="${location.id}"
+                                                th:text="${location.locationName}" th:selected="${departureLocation ==location.id}">Open this
                                             select menu
                                         </option>
-                                    </select>
+                                    </select >
                                 </label>
 
-                                <label>
-                                    <select name="specialityArrive" class=" custom-select"  title="Choose one of the following..." >
-                                        <option th:each="location : ${locations}" value="${location.id}" th:text="${location.locationName}" selected>Open this
+                                <label style="width: 30%">
+                                    <select  name="arriveLocation" class=" custom-select"
+                                            title="Choose one of the following...">
+                                        <option th:each="location : ${locations}"
+                                                th:name="${location.id}" th:value="${location.id}"
+                                                th:text="${location.locationName}"
+                                                th:selected="${arriveLocation == location.id}"> Open this
                                             select menu
                                         </option>
                                     </select>
                                 </label>
-<!--                                <a href="th:href="${url}""></a>-->
+                                <button type="submite" rel="tooltip"
+                                        title="Create"
+                                        class="btn btn-success">
+                                    Show
+                                </button>
+                            </form>
+                            <form class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-warning">
+                                    <th>Status</th>
+                                    <th>Distance</th>
+                                    <th>Price</th>
+                                    <th>Location departure</th>
+                                    <th>Location arrival</th>
+                                    <th>Driver Name</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="tripByReq : ${tripsByRequest}">
+                                        <td th:text="${tripByReq.status}"></td>
+                                        <td th:text="${tripByReq.distance} + ' Km'"></td>
+                                        <td th:text="'$'+${tripByReq.price}"></td>
+                                        <td th:text="${tripByReq.departure.locationName}"></td>
+                                        <td th:text="${tripByReq.arrival.locationName}"></td>
+                                        <td th:text="${tripByReq.driverDto.userDto.firstName} + ' ' + ${tripByReq.driverDto.userDto.lastName}"></td>
+                                        <td class="td-actions text-right">
+                                            <a th:href="${'/hide/' +{tripByReq.id}}" type="submit" rel="tooltip"
+                                               title="Remove"
+                                               class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">open</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </form>
                         </div>
                     </div>
@@ -269,6 +309,10 @@
                     &copy;
                     <script>
               document.write(new Date().getFullYear())
+
+
+
+
 
 
 
@@ -530,6 +574,10 @@
 
 
 
+
+
+
+
 </script>
 <script>
     $(document).ready(function() {
@@ -537,6 +585,10 @@
       md.initDashboardPageCharts();
 
     });
+
+
+
+
 
 
 

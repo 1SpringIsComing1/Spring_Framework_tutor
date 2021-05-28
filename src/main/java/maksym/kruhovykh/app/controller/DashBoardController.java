@@ -3,15 +3,13 @@ package maksym.kruhovykh.app.controller;
 import lombok.RequiredArgsConstructor;
 import maksym.kruhovykh.app.dto.DashBoardDto;
 import maksym.kruhovykh.app.dto.LocationDto;
+import maksym.kruhovykh.app.dto.TripDto;
 import maksym.kruhovykh.app.service.DashBoardService;
 import maksym.kruhovykh.app.service.LocationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -44,6 +42,18 @@ public class DashBoardController {
 
         return "redirect:/dashboard";
     }
+
+    @GetMapping("/create")
+    public String create(Model model,Principal principal, @RequestParam(value = "departureLocation", required = false) Integer departureLocation,
+                         @RequestParam(value = "arriveLocation", required = false) Integer arriveLocation) {
+        List<TripDto> tripsByRequest = dashBoardService.findAlLByCitiesIds(departureLocation, arriveLocation);
+        model.addAttribute("departureLocation", departureLocation);
+        model.addAttribute("arriveLocation", arriveLocation);
+        model.addAttribute("tripsByRequest", tripsByRequest);
+        return "forward:/dashboard";
+    }
+
+
 
     // TODO: 5/28/2021 Добавить возможность создания Тура ( с учётом мест в машине , лучше забитые дизейблить )
 }

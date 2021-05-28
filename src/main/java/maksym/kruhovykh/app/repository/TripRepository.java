@@ -28,7 +28,7 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
     @Query("SELECT trip FROM Trip trip where trip.client =:client and  trip.status in :statuses and trip.isShowed = true ")
     List<Trip> findTripsByStatusAndClient(@Param("statuses") List<Status> status, @Param("client") Client client);
 
-    List<Trip> findTripsByStatusAndClientAndIsShowed(Status status, Client client,Boolean isShowed);
+    List<Trip> findTripsByStatusAndClientAndIsShowed(Status status, Client client, Boolean isShowed);
 
     @Modifying
     @Query("update Trip trip set trip.isShowed = false where trip.id = ?1")
@@ -37,4 +37,6 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM trip t LEFT JOIN driver d on d.id = t.driver_id WHERE departure_time >= ?2 and arrival_time <= ?1 and t.id = ?3 ")
     List<Trip> tripBetween(LocalDateTime arrivalTime, LocalDateTime departureTime, Integer driverId);
 
+    @Query("select trip From Trip trip where trip.arrival.id = ?1 and trip.departure.id=?2")
+    List<Trip> findAllByCitiesIds(Integer departureId, Integer arrivalId);
 }
