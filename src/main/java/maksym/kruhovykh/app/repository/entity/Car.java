@@ -15,8 +15,14 @@ import javax.persistence.*;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column
+    Integer maxCountOfPlaces;
+
+    @Column
+    Integer currentCountOfPlaces;
 
     @OneToOne
     private Brand brand;

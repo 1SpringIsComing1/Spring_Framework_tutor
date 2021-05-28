@@ -15,6 +15,8 @@ public interface CarMapper {
             @Mapping(target = "id", source = "id"),
             @Mapping(target = "typeOfCarDto", source = "typeOfCar."),
             @Mapping(target = "brandDto", source = "brand."),
+            @Mapping(target = "maxCountOfPlaces", source = "maxCountOfPlaces."),
+            @Mapping(target = "currentCountOfPlaces", source = "currentCountOfPlaces."),
     })
     CarDto carToCarDto(Car car);
 

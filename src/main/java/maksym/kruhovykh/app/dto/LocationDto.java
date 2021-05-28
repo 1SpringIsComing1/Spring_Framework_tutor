@@ -5,27 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Pattern;
 
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class AddressDto {
+public class LocationDto {
 
     private Integer id;
 
     @Pattern(regexp = "[A-Za-zА-Яа-яёЁ]{1,200}", message = "Address name inCorrect")
 
-    private String streetName;
-
-    private Integer numberOfBuilding;
-
-    private Double latitude;
-
-    private Double longitude;
-
-    // TODO: 5/22/2021 если хватит времени добавить регексы, если нет удалить коментарий :)
+    private String locationName;
 
 }

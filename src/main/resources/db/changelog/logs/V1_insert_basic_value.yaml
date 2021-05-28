@@ -1,0 +1,408 @@
+databaseChangeLog:
+  - changeSet:
+      id: User data
+      author: Maksym Kruhovykh
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: email
+                  value: "maksym@gmail.com"
+              - column:
+                  name: first_name
+                  value: "Maksym"
+              - column:
+                  name: last_name
+                  value: "Kruhovykh"
+              - column:
+                  name: password
+                  value: "qweqweqwe"
+
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: email
+                  value: "Test1@gmail.com"
+              - column:
+                  name: first_name
+                  value: "Andey"
+              - column:
+                  name: last_name
+                  value: "Shpak"
+              - column:
+                  name: password
+                  value: "qwerty123"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: email
+                  value: "Test2@gmail.com"
+              - column:
+                  name: first_name
+                  value: "Taras"
+              - column:
+                  name: last_name
+                  value: "Buhanka"
+              - column:
+                  name: password
+                  value: "qwerty321"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: email
+                  value: "Test3@gmail.com"
+              - column:
+                  name: first_name
+                  value: "Vova"
+              - column:
+                  name: last_name
+                  value: "Shvartz"
+              - column:
+                  name: password
+                  value: "qweqwewq"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "BMW"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Audi"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Mercedes"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Chevrolet"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Cadillac"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Volkswagen"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Tesla"
+        - insert:
+            tableName: brand
+            columns:
+              - column:
+                  name: name
+                  value: "Mazda"
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Sedan"
+              - column:
+                  name: transportation_price_per_km
+                  value: 1
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Coupe"
+              - column:
+                  name: transportation_price_per_km
+                  value: 2
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Sport car"
+              - column:
+                  name: transportation_price_per_km
+                  value: 5
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Hatchback"
+              - column:
+                  name: transportation_price_per_km
+                  value: 3
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Convertible"
+              - column:
+                  name: transportation_price_per_km
+                  value: 4
+        - insert:
+            tableName: type_of_car
+            columns:
+              - column:
+                  name: name
+                  value: "Minivan"
+              - column:
+                  name: transportation_price_per_km
+                  value: 2
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 1
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 1
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 2
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 1
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 3
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 1
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 4
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 1
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 1
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 2
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 2
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 2
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 3
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 2
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 4
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 2
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 1
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 3
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 2
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 3
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 3
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 3
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 4
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 3
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 1
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 4
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 2
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 4
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 3
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 4
+        - insert:
+            tableName: car
+            columns:
+              - column:
+                  name: current_count_of_places
+                  value: 0
+              - column:
+                  name: brand_id
+                  value: 4
+              - column:
+                  name: max_count_of_places
+                  value: 5
+              - column:
+                  name: type_of_car_id
+                  value: 4

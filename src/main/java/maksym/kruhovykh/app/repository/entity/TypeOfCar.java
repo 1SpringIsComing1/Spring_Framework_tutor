@@ -14,7 +14,7 @@ import javax.persistence.*;
 @ToString
 public class TypeOfCar {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column

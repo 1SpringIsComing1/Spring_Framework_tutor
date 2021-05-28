@@ -6,7 +6,7 @@ import maksym.kruhovykh.app.utils.Status;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Table(name = "`order`")
+@Table(name = "trip")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,40 +14,41 @@ import java.time.LocalDateTime;
 @Entity
 @ToString
 @Builder
-public class Order {
+public class Trip {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column
-    private String title;
-
-    @Column
-    private String description;
 
     @Column
     private Integer distance;
 
     @OneToOne
-    private Address departures;
+    private Location departure;
 
     @OneToOne
-    private Address arrivals;
+    private Location arrival;
 
     @Column
     private Double price;
 
     @Column
-    private LocalDateTime dateCreation;
+    private LocalDateTime departureTime;
+
+    @Column
+    private LocalDateTime arrivalTime;
 
     @OneToOne
     private Driver driver;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
     private Client client;
 
-   @Enumerated(EnumType.ORDINAL)
-   private Status status;
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
+
+    @Column(columnDefinition = "boolean default true")
+    private Boolean isShowed;
 
 }

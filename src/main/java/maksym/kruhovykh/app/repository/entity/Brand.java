@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 public class Brand {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column

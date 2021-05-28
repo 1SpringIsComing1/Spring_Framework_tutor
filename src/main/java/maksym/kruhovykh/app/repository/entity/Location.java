@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "driver")
+@Table(name = "location")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,16 +12,12 @@ import javax.persistence.*;
 @Entity
 @ToString
 @Builder
-public class Driver {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id")
-    private Car car;
-
-    @OneToOne
-    private User user;
+    @Column
+    private String locationName;
 }

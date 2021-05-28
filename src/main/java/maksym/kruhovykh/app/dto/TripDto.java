@@ -12,27 +12,28 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class OrderDto {
+public class TripDto {
 
     private Integer id;
 
-    private String title;
-
-    private String description;
-
     private Integer distance;
 
-    private AddressDto departures;
+    private LocationDto departure;
 
-    private AddressDto arrivals;
+    private LocationDto arrival;
 
     private Double price;
 
-    private LocalDateTime dateCreation;
+    private LocalDateTime departureTime;
+
+    private LocalDateTime arrivalTime;
 
     private DriverDto driverDto;
 
     private ClientDto clientDto;
 
     private Status status;
+
+    private Boolean isShowed;
+
 }

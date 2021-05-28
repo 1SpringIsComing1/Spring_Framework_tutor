@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
