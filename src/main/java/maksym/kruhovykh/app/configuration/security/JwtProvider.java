@@ -47,7 +47,7 @@ public class JwtProvider {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(Timestamp.valueOf(LocalDateTime.now()))
-                .setExpiration(Timestamp.valueOf(LocalDateTime.now().plusHours(Long.parseLong(expirationTimeHours))))
+                .setExpiration(Timestamp.valueOf(LocalDateTime.now().plusSeconds(Long.parseLong(expirationTimeHours))))
                 .signWith(SignatureAlgorithm.HS512, encodedSecretKey)
                 .compact();
     }

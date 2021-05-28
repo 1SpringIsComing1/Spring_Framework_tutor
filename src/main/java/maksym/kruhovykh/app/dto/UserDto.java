@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import maksym.kruhovykh.app.utils.Role;
 
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Data
 @Builder
@@ -25,5 +27,7 @@ public class UserDto {
 
     @Pattern(regexp = "[A-Za-zA-Яа-яёЁ!_#$%^&*()-=+-]{2,32}", message = "Password inCorrect")
     private String password;
+
+    private Set<Role> roles;
 
 }
