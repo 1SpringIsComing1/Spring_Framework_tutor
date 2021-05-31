@@ -41,7 +41,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new JwtFilter(provider), UsernamePasswordAuthenticationFilter.class)
                 .cors();
-        // TODO: 5/30/2021 check for path if not work delete /
     }
 
     @Bean

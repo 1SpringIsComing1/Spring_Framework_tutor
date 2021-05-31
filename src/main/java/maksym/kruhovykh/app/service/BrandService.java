@@ -33,7 +33,7 @@ public class BrandService {
         Utils.isNull(brandDto, BRAND_IS_EMPTY);
 
         Brand brand = brandMapper.brandDtoToBrand(brandDto);
-        if (brandRepository.findByNameContainingIgnoreCase(brand.getName()).isPresent()) { //todo check it
+        if (brandRepository.findByNameContainingIgnoreCase(brand.getName()).isPresent()) {
             log.error("Brand [" + brand.getName() + "] already exist");
             throw new EntityExistsException("Brand [" + brand.getName() + "] already exist");
         }
