@@ -2,7 +2,7 @@ package maksym.kruhovykh.app.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import maksym.kruhovykh.app.Utils;
+import maksym.kruhovykh.app.utils.Utils;
 import maksym.kruhovykh.app.configuration.security.JwtProvider;
 import maksym.kruhovykh.app.dto.LoginDto;
 import maksym.kruhovykh.app.dto.SignUpDto;
@@ -11,7 +11,7 @@ import maksym.kruhovykh.app.repository.UserRepository;
 import maksym.kruhovykh.app.repository.entity.User;
 import maksym.kruhovykh.app.service.exception.AuthException;
 import maksym.kruhovykh.app.service.mapper.UserMapper;
-import maksym.kruhovykh.app.utils.Role;
+import maksym.kruhovykh.app.service.enumeration.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;

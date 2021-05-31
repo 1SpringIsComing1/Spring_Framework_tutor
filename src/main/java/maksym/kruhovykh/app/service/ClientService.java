@@ -2,12 +2,12 @@ package maksym.kruhovykh.app.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import maksym.kruhovykh.app.Utils;
 import maksym.kruhovykh.app.dto.ClientDto;
 import maksym.kruhovykh.app.repository.ClientRepository;
 import maksym.kruhovykh.app.repository.entity.Client;
 import maksym.kruhovykh.app.service.mapper.ClientMapper;
 import maksym.kruhovykh.app.service.mapper.UserMapper;
+import maksym.kruhovykh.app.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -30,6 +29,12 @@ public class ClientService {
     public ClientDto findById(Integer id) {
         return clientRepository
                 .findById(id)
+                .map(clientMapper::clientToClientDto)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public ClientDto findClientByUserEmail(String email) {
+        return clientRepository.findClientByUserEmail(email)
                 .map(clientMapper::clientToClientDto)
                 .orElseThrow(EntityNotFoundException::new);
     }

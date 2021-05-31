@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import maksym.kruhovykh.app.utils.Status;
+import maksym.kruhovykh.app.service.enumeration.Status;
 
 import java.time.LocalDateTime;
 

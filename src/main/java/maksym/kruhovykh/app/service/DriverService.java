@@ -2,10 +2,9 @@ package maksym.kruhovykh.app.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import maksym.kruhovykh.app.Utils;
+import maksym.kruhovykh.app.utils.Utils;
 import maksym.kruhovykh.app.dto.DriverDto;
 import maksym.kruhovykh.app.repository.DriverRepository;
-import maksym.kruhovykh.app.repository.entity.Client;
 import maksym.kruhovykh.app.repository.entity.Driver;
 import maksym.kruhovykh.app.service.mapper.DriverMapper;
 import org.springframework.data.domain.Page;

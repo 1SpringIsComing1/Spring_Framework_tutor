@@ -2,7 +2,7 @@ package maksym.kruhovykh.app.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import maksym.kruhovykh.app.Utils;
+import maksym.kruhovykh.app.utils.Utils;
 import maksym.kruhovykh.app.dto.LocationDto;
 import maksym.kruhovykh.app.repository.LocationRepository;
 import maksym.kruhovykh.app.repository.entity.Location;

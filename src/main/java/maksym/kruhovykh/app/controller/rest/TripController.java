@@ -1,13 +1,16 @@
 package maksym.kruhovykh.app.controller.rest;
 
 import lombok.AllArgsConstructor;
+import maksym.kruhovykh.app.configuration.security.annotations.CurrentUser;
 import maksym.kruhovykh.app.dto.TripDto;
+import maksym.kruhovykh.app.repository.entity.Trip;
 import maksym.kruhovykh.app.service.TripService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -53,4 +56,9 @@ public class TripController {
         tripService.delete(tripDto);
     }
 
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.OK)
+    public TripDto register(@CurrentUser User user, TripDto tripDto) {
+        return tripService.registerForTrip(tripDto, user.getUsername());
+    }
 }

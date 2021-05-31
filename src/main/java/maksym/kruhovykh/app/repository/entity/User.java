@@ -1,7 +1,7 @@
 package maksym.kruhovykh.app.repository.entity;
 
 import lombok.*;
-import maksym.kruhovykh.app.utils.Role;
+import maksym.kruhovykh.app.service.enumeration.Role;
 
 import javax.persistence.*;
 import java.util.Set;

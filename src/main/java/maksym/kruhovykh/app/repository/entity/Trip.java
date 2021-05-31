@@ -1,7 +1,7 @@
 package maksym.kruhovykh.app.repository.entity;
 
 import lombok.*;
-import maksym.kruhovykh.app.utils.Status;
+import maksym.kruhovykh.app.service.enumeration.Status;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

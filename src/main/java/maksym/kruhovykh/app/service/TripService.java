@@ -2,11 +2,13 @@ package maksym.kruhovykh.app.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import maksym.kruhovykh.app.Utils;
+import maksym.kruhovykh.app.dto.CarDto;
+import maksym.kruhovykh.app.dto.ClientDto;
 import maksym.kruhovykh.app.dto.TripDto;
 import maksym.kruhovykh.app.repository.TripRepository;
 import maksym.kruhovykh.app.repository.entity.Trip;
 import maksym.kruhovykh.app.service.mapper.TripMapper;
+import maksym.kruhovykh.app.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class TripService {
     private static final Integer averageSpeed = 80;
     private static final int HOURS_FOR_REST = 2;
 
+    private final ClientService clientService;
     private final TripRepository tripRepository;
     private final TripMapper tripMapper;
 
@@ -46,6 +49,22 @@ public class TripService {
 
         return tripMapper.tripToTripDto(tripRepository.save(trip));
 
+    }
+
+    public TripDto registerForTrip(TripDto tripDto, String clientEmail) {
+        TripDto trip = tripRepository.findById(tripDto.getId())
+                .map(tripMapper::tripToTripDto)
+                .orElseThrow(EntityNotFoundException::new);
+        ClientDto client = clientService.findClientByUserEmail(clientEmail);
+        CarDto carDto = trip.getDriverDto().getCarDto();
+
+        if (carDto.getMaxCountOfPlaces() - carDto.getCurrentCountOfPlaces() < 1) {
+            log.error("Car is Full");
+            throw new RuntimeException("Car is Full");
+        }
+        trip.setClientDto(client);
+
+        return tripMapper.tripToTripDto(tripRepository.save(tripMapper.tripDtoToTrip(trip)));
     }
 
     public TripDto update(TripDto tripDto) {

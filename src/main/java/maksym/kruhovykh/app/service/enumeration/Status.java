@@ -1,4 +1,4 @@
-package maksym.kruhovykh.app.utils;
+package maksym.kruhovykh.app.service.enumeration;
 
 public enum Status {
     FULL, PENDING, CANCEL, CLOSED

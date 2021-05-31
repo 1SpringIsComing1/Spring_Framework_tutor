@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import maksym.kruhovykh.app.utils.Role;
+import maksym.kruhovykh.app.service.enumeration.Role;
 
 import javax.validation.constraints.Pattern;
 import java.util.Set;

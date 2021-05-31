@@ -8,7 +8,7 @@ import maksym.kruhovykh.app.repository.ClientRepository;
 import maksym.kruhovykh.app.repository.TripRepository;
 import maksym.kruhovykh.app.repository.entity.Client;
 import maksym.kruhovykh.app.service.mapper.TripMapper;
-import maksym.kruhovykh.app.utils.Status;
+import maksym.kruhovykh.app.service.enumeration.Status;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

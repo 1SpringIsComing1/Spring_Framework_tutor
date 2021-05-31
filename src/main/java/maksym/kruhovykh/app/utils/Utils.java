@@ -1,4 +1,4 @@
-package maksym.kruhovykh.app;
+package maksym.kruhovykh.app.utils;
 
 import lombok.extern.slf4j.Slf4j;
 

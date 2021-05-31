@@ -1,9 +1,8 @@
 package maksym.kruhovykh.app.repository;
 
 import maksym.kruhovykh.app.repository.entity.Client;
-import maksym.kruhovykh.app.repository.entity.Driver;
 import maksym.kruhovykh.app.repository.entity.Trip;
-import maksym.kruhovykh.app.utils.Status;
+import maksym.kruhovykh.app.service.enumeration.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
