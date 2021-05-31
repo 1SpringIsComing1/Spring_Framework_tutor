@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -37,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/client/**","/api/driver/**","/api/user","/api/car").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .antMatchers("/api/client/**", "/api/driver/**", "/api/user/**", "/api/car/**").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(provider), UsernamePasswordAuthenticationFilter.class)
                 .cors();
@@ -52,4 +53,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     AuthenticationManager getAuthenticationManager() throws Exception {
         return authenticationManager();
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(AUTH_WHITELIST);
+    }
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
 }
