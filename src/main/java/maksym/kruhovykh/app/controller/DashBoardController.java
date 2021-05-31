@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -52,8 +51,4 @@ public class DashBoardController {
         model.addAttribute("tripsByRequest", tripsByRequest);
         return "forward:/dashboard";
     }
-
-
-
-    // TODO: 5/28/2021 Добавить возможность создания Тура ( с учётом мест в машине , лучше забитые дизейблить )
 }

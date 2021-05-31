@@ -7,11 +7,12 @@ import maksym.kruhovykh.app.dto.LocationDto;
 import maksym.kruhovykh.app.repository.LocationRepository;
 import maksym.kruhovykh.app.repository.entity.Location;
 import maksym.kruhovykh.app.service.mapper.LocationMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,6 +42,12 @@ public class LocationService {
                 .sorted(Comparator.comparing(LocationDto::getLocationName))
                 .collect(Collectors.toList());
 
+    }
+
+    public Page<LocationDto> findAll(Pageable pageable) {
+        Page<Location> clientPage = locationRepository.findAll(pageable);
+
+        return clientPage.map(locationMapper::locationToLocationDto);
     }
 
     public LocationDto create(LocationDto locationDto) {

@@ -8,11 +8,14 @@ import maksym.kruhovykh.app.repository.ClientRepository;
 import maksym.kruhovykh.app.repository.entity.Client;
 import maksym.kruhovykh.app.service.mapper.ClientMapper;
 import maksym.kruhovykh.app.service.mapper.UserMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +32,11 @@ public class ClientService {
                 .findById(id)
                 .map(clientMapper::clientToClientDto)
                 .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public Page<ClientDto> findAll(Pageable pageable) {
+        Page<Client> clientPage = clientRepository.findAll(pageable);
+        return clientPage.map(clientMapper::clientToClientDto);
     }
 
     public ClientDto update(ClientDto clientDto) {

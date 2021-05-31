@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import maksym.kruhovykh.app.Utils;
 import maksym.kruhovykh.app.dto.DriverDto;
 import maksym.kruhovykh.app.repository.DriverRepository;
+import maksym.kruhovykh.app.repository.entity.Client;
 import maksym.kruhovykh.app.repository.entity.Driver;
 import maksym.kruhovykh.app.service.mapper.DriverMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -60,4 +63,8 @@ public class DriverService {
                 .orElseThrow(EntityNotFoundException::new);
     }
 
+    public Page<DriverDto> findAll(Pageable pageable) {
+        Page<Driver> clientPage = driverRepository.findAll(pageable);
+        return clientPage.map(driverMapper::driverToDriverDto);
+    }
 }

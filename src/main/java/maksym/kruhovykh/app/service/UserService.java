@@ -12,6 +12,8 @@ import maksym.kruhovykh.app.repository.entity.User;
 import maksym.kruhovykh.app.service.exception.AuthException;
 import maksym.kruhovykh.app.service.mapper.UserMapper;
 import maksym.kruhovykh.app.utils.Role;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -68,6 +70,7 @@ public class UserService {
         return userRepository
                 .findById(userDto.getId())
                 .map(updateUser(userDto))
+                .map(userMapper::userToUserDto)
                 .orElseThrow(() -> new EntityNotFoundException("User with Id [" + userDto.getId() + "] doesn't exist"));
     }
 
@@ -81,14 +84,37 @@ public class UserService {
         }
 
         User user = User.builder()
+                .firstName(signUpDto.getFirstName())
+                .lastName(signUpDto.getLastName())
                 .email(signUpDto.getEmail())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .roles(Collections.singleton(Role.CLIENT))
                 .build();
 
         User save = userRepository.save(user);
+        save.setPassword(null);
 
         return userMapper.userToUserDto(save);
+    }
+
+    public Page<UserDto> findAll(Pageable pageable) {
+        Page<User> clientPage = userRepository.findAll(pageable);
+        return clientPage.map(userMapper::userToUserDto);
+    }
+
+    public void delete(UserDto userDto) {
+        userRepository.findByEmail(userDto.getEmail())
+                .map(user -> {
+                    userRepository.delete(user);
+                    return user;
+                })
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public UserDto findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(userMapper::userToUserDto)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     private String getAuthenticationToken(LoginDto loginDto) {
@@ -103,16 +129,17 @@ public class UserService {
         return jwtProvider.createToken(email, roles);
     }
 
-    private Function<User, UserDto> updateUser(UserDto userDto) {
+    private Function<User, User> updateUser(UserDto userDto) {
         return user -> {
-            user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            userRepository.save(user);
+            User save = userMapper.userDtoToUser(userDto);
+
+            userRepository.save(save);
+
             log.info("User with id [" + userDto.getId() + "] updated ");
-            return userDto;
+            return save;
 
         };
     }
+
+
 }

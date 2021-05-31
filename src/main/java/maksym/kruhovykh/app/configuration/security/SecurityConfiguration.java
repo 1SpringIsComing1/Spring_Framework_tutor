@@ -34,12 +34,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
+                .and()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/login").permitAll()
-                    .and()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/client/**","/api/driver/**","/api/user","/api/car").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .and()
                 .addFilterBefore(new JwtFilter(provider), UsernamePasswordAuthenticationFilter.class)
                 .cors();
+        // TODO: 5/30/2021 check for path if not work delete /
     }
 
     @Bean

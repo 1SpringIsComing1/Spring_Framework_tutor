@@ -30,7 +30,7 @@ public class User {
     @Column(nullable = false, length = 120, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 15, unique = true)
+    @Column(nullable = false, length = 64, unique = true)
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

@@ -6,10 +6,9 @@ import maksym.kruhovykh.app.Utils;
 import maksym.kruhovykh.app.dto.TripDto;
 import maksym.kruhovykh.app.repository.TripRepository;
 import maksym.kruhovykh.app.repository.entity.Trip;
-import maksym.kruhovykh.app.service.mapper.ClientMapper;
-import maksym.kruhovykh.app.service.mapper.DriverMapper;
-import maksym.kruhovykh.app.service.mapper.LocationMapper;
 import maksym.kruhovykh.app.service.mapper.TripMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -28,21 +27,17 @@ public class TripService {
 
     private final TripRepository tripRepository;
     private final TripMapper tripMapper;
-    private final LocationMapper locationMapper;
-    private final ClientMapper clientMapper;
-    private final DriverMapper driverMapper;
 
-    public TripDto findOrderById(Integer id) {
+    public TripDto findById(Integer id) {
         return tripRepository.findById(id)
                 .map(tripMapper::tripToTripDto)
                 .orElseThrow(() -> new EntityNotFoundException("Trip  [" + id + "] doesn't exist"));
     }
 
-    public TripDto createOrder(TripDto tripDto) {
+    public TripDto create(TripDto tripDto) {
         Utils.isNull(tripDto, TRIP_IS_EMPTY);
         Trip trip = tripMapper.tripDtoToTrip(tripDto);
         Integer distance = trip.getDistance();
-
         calculateTimeDeparture(trip, distance);
 
         checkPossibilityOfCreatingOrder(trip);
@@ -61,6 +56,11 @@ public class TripService {
                 .map(tripMapper::tripToTripDto)
                 .orElseThrow(() -> new EntityNotFoundException("Trip with Id [" + tripDto.getId() + "] doesn't exist"));
 
+    }
+
+    public Page<TripDto> findAll(Pageable pageable) {
+        Page<Trip> tripDtos = tripRepository.findAll(pageable);
+        return tripDtos.map(tripMapper::tripToTripDto);
     }
 
     public void delete(TripDto tripDto) {
@@ -93,18 +93,8 @@ public class TripService {
 
     private Function<Trip, Trip> updateOrder(TripDto tripDto) {
         return trip -> {
-            trip.setArrival(locationMapper.locationDtoToLocation(tripDto.getArrival()));
-            trip.setDeparture(locationMapper.locationDtoToLocation(tripDto.getDeparture()));
-            trip.setClient(clientMapper.clientDtoToClient(tripDto.getClientDto()));
-            trip.setDriver(driverMapper.driverDtoToDriver(tripDto.getDriverDto()));
-            trip.setDepartureTime(tripDto.getDepartureTime());
-            trip.setArrivalTime(tripDto.getArrivalTime());
-            trip.setDistance(tripDto.getDistance());
-            trip.setStatus(tripDto.getStatus());
-            trip.setPrice(tripDto.getPrice());
-            trip.setIsShowed(tripDto.getIsShowed());
-
-            return tripRepository.save(trip);
+            Trip save = tripMapper.tripDtoToTrip(tripDto);
+            return tripRepository.save(save);
 
         };
     }
@@ -123,6 +113,7 @@ public class TripService {
                     + " is busy");
         }
 
-// TODO: 5/27/2021  add Update getArrivalTime (distance/averageSpeed) calculate price ( distance * perKm
     }
+
+
 }

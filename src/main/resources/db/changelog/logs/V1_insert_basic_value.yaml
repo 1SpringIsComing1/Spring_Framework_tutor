@@ -18,6 +18,9 @@ databaseChangeLog:
               - column:
                   name: password
                   value: "qweqweqwe"
+              - column:
+                  name: password
+                  value: "qweqweqwe"
 
         - insert:
             tableName: user
@@ -64,6 +67,56 @@ databaseChangeLog:
               - column:
                   name: password
                   value: "qweqwewq"
+
+        - insert:
+            tableName: usr_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: roles
+                  value: "ADMIN"
+
+        - insert:
+            tableName: usr_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: roles
+                  value: "DRIVER"
+
+        - insert:
+            tableName: usr_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: roles
+                  value: "CLIENT"
+
+        - insert:
+            tableName: usr_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: roles
+                  value: "CLIENT"
+
+        - insert:
+            tableName: usr_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 4
+              - column:
+                  name: roles
+                  value: "CLIENT"
         - insert:
             tableName: brand
             columns:
