@@ -61,7 +61,7 @@ public class UserService {
         return userRepository
                 .findById(id)
                 .map(userMapper::userToUserDto)
-                .orElseThrow(() -> new RuntimeException("User id = [" + id +
+                .orElseThrow(() -> new EntityNotFoundException("User id = [" + id +
                         "] not found"));
     }
 

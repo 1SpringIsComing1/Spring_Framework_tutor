@@ -15,9 +15,4 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     Optional<Client> findClientByUserEmail(String email);
 
-
-
-//
-//    @Query(value = "select * from Client cl left join user u on u.id = cl.user_id where u.email = ?1",nativeQuery = true)
-//    Optional<Client> findClientByUserEmail(String email);
 }

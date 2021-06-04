@@ -37,6 +37,7 @@ databaseChangeLog:
               - column:
                   name: password
                   value: "qwerty123"
+
         - insert:
             tableName: user
             columns:

@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**","/dashboard","/login","/**").permitAll()
                 .antMatchers("/api/client/**", "/api/driver/**", "/api/user/**", "/api/car/**").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtFilter(provider), UsernamePasswordAuthenticationFilter.class)
@@ -62,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
-            "/webjars/**"
+            "/webjars/**",
+            "/resources/"
     };
 }
