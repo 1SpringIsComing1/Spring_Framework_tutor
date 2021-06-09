@@ -1,8 +1,10 @@
 package maksym.kruhovykh.app.repository.entity;
 
 import lombok.*;
+import maksym.kruhovykh.app.service.enumeration.Role;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Getter
@@ -11,12 +13,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
+@ToString
 @Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
+    private Integer id;
 
     @Column(nullable = false, length = 50)
     private String firstName;
@@ -27,8 +30,12 @@ public class User {
     @Column(nullable = false, length = 120, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 15, unique = true)
+    @Column(nullable = false, length = 64, unique = true)
     private String password;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "usr_role", foreignKey = @ForeignKey(name = "usr_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
 }
