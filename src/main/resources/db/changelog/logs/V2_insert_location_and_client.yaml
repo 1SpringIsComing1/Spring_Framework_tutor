@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: User data
+      author: Maksym Kruhovykh
+      changes:
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Sumy"
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Kyiv"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Dnipro"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Kharkov"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Odessa"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Lviv"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Poltava"
+
+        - insert:
+            tableName: location
+            columns:
+              - column:
+                  name: location_name
+                  value: "Kherson"
+
+        - insert:
+            tableName: client
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+
+        - insert:
+            tableName: client
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+
+        - insert:
+            tableName: driver
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+
+              - column:
+                  name: car_id
+                  value: 6
